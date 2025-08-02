@@ -12,6 +12,14 @@ public class TransferVideoRecorder : MonoBehaviour
     public int width = 1080;
     public int height = 720;
 
+    [System.Serializable]
+    public struct CameraPose
+    {
+        public Vector3 position;
+        public Vector3 rotation; // Euar Angle
+    }
+    public List<CameraPose> cameraPoses = new List<CameraPose>();
+
     private RenderTexture rt;
     private Texture2D tex;
     private List<string> framePaths = new List<string>();
@@ -21,14 +29,26 @@ public class TransferVideoRecorder : MonoBehaviour
 
     public void BeginRecording()
     {
-        string basePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "rcare_workspace/dataset/transferring/videos");
-        if (!Directory.Exists(basePath)) Directory.CreateDirectory(basePath);
+        if (cameraPoses.Count > 0)
+        {
+            int idx = UnityEngine.Random.Range(0, cameraPoses.Count);
+            recordCam.transform.position = cameraPoses[idx].position;
+            recordCam.transform.rotation = Quaternion.Euler(cameraPoses[idx].rotation);
+            UnityEngine.Debug.Log($"🎥 Camera moved to preset {idx + 1}");
+        }
 
-        int idx = 1;
+        string basePath = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+            "Transferring", "Videos"
+        );
+        if (!Directory.Exists(basePath))
+            Directory.CreateDirectory(basePath);
+
+        int idxFolder = 1;
         do
         {
-            outputDir = Path.Combine(basePath, $"transfer_{idx:000}");
-            idx++;
+            outputDir = Path.Combine(basePath, $"transfer_{idxFolder:000}");
+            idxFolder++;
         } while (Directory.Exists(outputDir));
         Directory.CreateDirectory(outputDir);
 
@@ -49,33 +69,31 @@ public class TransferVideoRecorder : MonoBehaviour
         RenderTexture.active = null;
 
         UnityEngine.Debug.Log($"🎞️ Recording stopped. {frameIndex} frames saved.");
-
         StartCoroutine(EncodeAndCleanUp());
     }
 
     IEnumerator EncodeAndCleanUp()
     {
-        yield return new WaitForSeconds(0.5f); // ensure last frame is flushed
+        yield return new WaitForSeconds(0.5f);
 
         string mp4Path = Path.Combine(outputDir, "transfer.mp4");
 
         Process ffmpeg = new Process();
         ffmpeg.StartInfo.FileName = "ffmpeg";
-        ffmpeg.StartInfo.Arguments = $"-y -framerate {frameRate} -i \"{Path.Combine(outputDir, "frame_%04d.png")}\" -c:v libx264 -pix_fmt yuv420p \"{mp4Path}\"";
+        ffmpeg.StartInfo.Arguments =
+            $"-y -framerate {frameRate} -i \"{Path.Combine(outputDir, "frame_%04d.png")}\" -c:v libx264 -pix_fmt yuv420p \"{mp4Path}\"";
         ffmpeg.StartInfo.UseShellExecute = false;
         ffmpeg.StartInfo.RedirectStandardOutput = true;
         ffmpeg.StartInfo.RedirectStandardError = true;
         ffmpeg.StartInfo.CreateNoWindow = true;
 
         ffmpeg.Start();
-        string output = ffmpeg.StandardError.ReadToEnd(); // helpful if you want to debug
+        string output = ffmpeg.StandardError.ReadToEnd();
         ffmpeg.WaitForExit();
 
         if (File.Exists(mp4Path))
         {
             UnityEngine.Debug.Log($"✅ Video saved to {mp4Path}, cleaning up PNGs...");
-
-            // Delete all PNGs
             foreach (string path in Directory.GetFiles(outputDir, "frame_*.png"))
                 File.Delete(path);
         }

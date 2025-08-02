@@ -116,7 +116,7 @@ public class TransferController : MonoBehaviour
         furnitureRandomizer = FindObjectOfType<FurnitureRandomizer>();
         furnitureRandomizer.RandomizeWalls();
         Debug.Log("Start 5 - Randomizing furniture");   
-            
+
         lastWheelPos = WheelChair.position;
         var baseLink = RobotRoot.Find("base_link");
         if (baseLink != null)
@@ -739,21 +739,26 @@ public class TransferController : MonoBehaviour
     }
     void SaveLogToJson()
     {
-        string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "rcare_workspace/dataset/transferring/json");
-        if (!Directory.Exists(dir))
-            Directory.CreateDirectory(dir);
+        // /home/qiandaoliu/Transferring/JSON
+        string baseDir = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+            "Transferring", "JSON"
+        );
+        if (!Directory.Exists(baseDir))
+            Directory.CreateDirectory(baseDir);
 
-        // Find next available file number
         int index = 1;
-        string path;
+        string dir;
         do
         {
-            path = Path.Combine(dir, $"transfer_{index:000}.json");
+            dir = Path.Combine(baseDir, $"transfer_{index:000}");
             index++;
         }
-        while (File.Exists(path));
+        while (Directory.Exists(dir));
+        Directory.CreateDirectory(dir);
 
-        // Serialize log
+        string path = Path.Combine(dir, "log.json");
+
         StringBuilder sb = new StringBuilder();
         sb.AppendLine("[");
         for (int i = 0; i < stepLogs.Count; i++)
