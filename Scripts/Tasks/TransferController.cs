@@ -20,7 +20,7 @@ public class TransferController : MonoBehaviour
     private float globalStartTime;
     private List<TransferStepLog> stepLogs = new List<TransferStepLog>();
     private DateTime sequenceStartTime;
-    TransferVideoRecorder recorder;
+    VideoRecorder recorder;
     private FloorRandomizer floorRandomizer;
     private PatientRandomizer patientRandomizer;
     private RopeRandomizer ropeRandomizer;
@@ -99,7 +99,7 @@ public class TransferController : MonoBehaviour
 
     void Start()
     {
-        recorder = FindObjectOfType<TransferVideoRecorder>();
+        recorder = FindObjectOfType<VideoRecorder>();
         Debug.Log("Start 1 - Recorder found");
 
         StartCoroutine(WaitBeforeStart());
