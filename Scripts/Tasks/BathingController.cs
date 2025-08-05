@@ -96,7 +96,7 @@ public class BathingController : MonoBehaviour
 
         globalStartTime = Time.time;
         if (recorder != null)
-            recorder.BeginRecording();
+           recorder.BeginRecording("Bathing");
 
         yield return StartCoroutine(RunAndLogStep(BathingBatheRightArm(), "BathingBatheRightArm"));
         yield return StartCoroutine(RunAndLogStep(BathingBatheRightLeg(), "BathingBatheRightLeg"));

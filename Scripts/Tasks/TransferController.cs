@@ -139,7 +139,7 @@ public class TransferController : MonoBehaviour
 
         globalStartTime = Time.time;
         if (recorder != null)
-            recorder.BeginRecording();
+            recorder.BeginRecording("Transfer");
 
         yield return StartCoroutine(RunAndLogStep(AlignLiftToBed(), "AlignLiftToBed"));
         yield return StartCoroutine(RunAndLogStep(LoadPatientOnLift(), "LoadPatientOnLift"));
