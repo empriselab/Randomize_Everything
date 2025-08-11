@@ -1,11 +1,11 @@
 ### Randomize scenes in RCareWorld
-##### Scripts to Randomize:
+### Scripts to Randomize:
 **1. Patient body size & outfit**  
 **2. Furnitures & Lights & Floors & Decorations in the scene**  
 **3. Camera Perspectives & Distances**  
 **4. Obi Cloth & Obi Rope's Colors and Textures**  
 
-##### Scenes we build:
+### Scenes we build:
 1. Transferring Patient from Bed to Wheelchair  
 2. Transferring Patient from Wheelchair to Bed  
 3. Bathing Patient on Bed  
