@@ -5,8 +5,10 @@
 **3. Camera Perspectives & Distances**  
 **4. Obi Cloth & Obi Rope's Colors and Textures**  
 
-![Patient Random](assets/patient_random.gif)
-![Room Random](assets/room_random.gif)
+<p align="center">
+  <img src="assets/patient_random.gif" width="45%" />
+  <img src="assets/room_random.gif" width="45%" />
+</p>
 
 ### Scenes we build:
 1. Transferring Patient from Bed to Wheelchair  
@@ -25,7 +27,9 @@
   <img src="assets/trans2.gif" width="45%" />
 </p>
 
-![Parallel Run](assets/parallel_run.gif)
+<p align="center">
+  <img src="assets/parallel_run.gif" width="90%" />
+</p>
 
 ### Scene Running Output:
 1. Video file for the rollout.  
