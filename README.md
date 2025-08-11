@@ -1,4 +1,4 @@
-### Randomize scenes in RCareWorld
+# Randomize scenes in RCareWorld
 ##### Scripts to Randomize:
 **1. Patient body size & outfit**
 **2. Furnitures & Lights & Floors & Decorations in the scene**
@@ -16,6 +16,10 @@
 8. Dressing Jacket for Patient on Bed
 9. Dressing Jacket for Patient on Wheelchair
 10. Tolieting Patient on Bed
+
+### Scene Running Output:
+1. Video file for the rollout.
+2. JSON file to specify subtasks' timeline for the rollout 
 
 ### Usage
 1. Put the folder under RCareUnity/Assets/RCareCommon
