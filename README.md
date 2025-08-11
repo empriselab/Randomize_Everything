@@ -3,5 +3,4 @@
 
 
 Resources Missing: 
-1. Resources/T-Shirt/FBX.fbx
-(To big to push, if you need that slack Qiandao Liu)
+1. Resources/T-Shirt/FBX.fbx (To big to push, if you need that slack Qiandao Liu)
