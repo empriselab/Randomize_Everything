@@ -22,7 +22,7 @@
 2. JSON file to specify subtasks' timeline for the rollout.  
 
 ### Usage
-1. Put the folder under RCareUnity/Assets/RCareCommon  
+1. Put the whole project under RCareUnity/Assets/RCareCommon  
 2. Edit → Project Settings → Tags and Layers, Add a new Tag named "IKTarget"  
 
 ### Resources Missed: 
