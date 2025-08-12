@@ -260,7 +260,6 @@ public class WheelchairShirtController : MonoBehaviour
         yield return new WaitForSeconds(4.0f);
     }
 
-
     void Update()
     {
         // Move Kinova with wheelchair
