@@ -42,7 +42,7 @@
 ### Resources Missed: 
 1. Resources/T-Shirt/FBX.fbx  
 2. The whole Furniture & Electronics model dataset  
-(To big to push, Slack me if you need that)  
+(To big to push, Slack me if you need)  
 
 ### Code support & Maintanance
 Qiandao Liu: ql342@cornell.edu
